@@ -1,7 +1,8 @@
-<<<<<<< HEAD
 # Obsidian
 
 Landing page for **Obsidian** — a luxury crypto trading bot SaaS. Built with Next.js and a dark, modern UI.
+
+![Obsidian landing page](public/fullpage.jpeg)
 
 ## Tech stack
 
@@ -71,7 +72,3 @@ app/
 ## License
 
 Private — Obsidian Inc.
-=======
-# ObsidianTrading
-Institutional-grade algorithms now available for your personal portfolio. Automate your strategy with zero latency and 24/7 market scanning.
->>>>>>> a8f746ec36efbfdafed5874882be672224172b9e
