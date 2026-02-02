@@ -9,6 +9,9 @@
     "lint": "eslint"
   },
   "dependencies": {
+    "@web3icons/react": "^4.1.16",
+    "cryptocurrency-icons": "^0.18.1",
+    "material-symbols": "^0.40.2",
     "next": "16.1.6",
     "react": "19.2.3",
     "react-dom": "19.2.3"
