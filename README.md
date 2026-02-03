@@ -4,9 +4,29 @@ Landing page for **Obsidian** — a luxury crypto trading bot SaaS. Built with N
 
 ## Screenshots
 
-| Landing | Login | Register | Dashboard |
-| :---: | :---: | :---: | :---: |
-| ![Landing](public/fullpage.jpeg) | ![Login](public/login.png) | ![Register](public/register2.png) | ![Dashboard](public/dashboard.png) |
+**Landing**
+
+![Landing](public/fullpage.jpeg)
+
+**Login**
+
+![Login](public/login.png)
+
+**Register**
+
+![Register](public/register2.png)
+
+**Dashboard**
+
+![Dashboard](public/dashboard.png)
+
+**Portfolio**
+
+![Portfolio](public/portfolio.png)
+
+**Trades**
+
+![Trades](public/trades.png)
 
 ## Tech stack
 
