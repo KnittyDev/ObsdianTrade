@@ -2,7 +2,11 @@
 
 Landing page for **Obsidian** — a luxury crypto trading bot SaaS. Built with Next.js and a dark, modern UI.
 
-![Obsidian landing page](public/fullpage.jpeg)
+## Screenshots
+
+| Landing | Login | Register | Dashboard |
+| :---: | :---: | :---: | :---: |
+| ![Landing](public/fullpage.jpeg) | ![Login](public/login.png) | ![Register](public/register2.png) | ![Dashboard](public/dashboard.png) |
 
 ## Tech stack
 
