@@ -6,8 +6,10 @@ import { useState } from "react";
 
 const navItems = [
   { href: "/dashboard", label: "Overview", icon: "dashboard" },
+  { href: "/dashboard/bots", label: "Manage bots", icon: "smart_toy" },
   { href: "/dashboard/portfolio", label: "Portfolio", icon: "account_balance_wallet" },
   { href: "/dashboard/trades", label: "Trades", icon: "swap_horiz" },
+  { href: "/dashboard/activity", label: "Activity", icon: "history" },
   { href: "/dashboard/settings", label: "Settings", icon: "settings" },
 ];
 

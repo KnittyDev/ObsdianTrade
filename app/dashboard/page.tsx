@@ -1,5 +1,7 @@
 "use client";
 
+import Link from "next/link";
+
 const stats = [
   {
     label: "Portfolio value",
@@ -95,12 +97,12 @@ export default function DashboardPage() {
               <span className="text-sm font-medium text-white">Active</span>
               <span className="text-xs text-gray-400">2 strategies running</span>
             </div>
-            <button
-              type="button"
-              className="mt-4 w-full cursor-pointer rounded-lg border border-white/20 bg-white/5 py-2.5 text-sm font-medium text-white transition-colors hover:bg-white/10"
+            <Link
+              href="/dashboard/bots"
+              className="mt-4 flex w-full cursor-pointer items-center justify-center rounded-lg border border-white/20 bg-white/5 py-2.5 text-sm font-medium text-white transition-colors hover:bg-white/10"
             >
               Manage bots
-            </button>
+            </Link>
           </div>
 
           <div className="glass-card rounded-xl border border-white/10 p-6">
