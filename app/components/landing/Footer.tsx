@@ -18,13 +18,13 @@ export function Footer() {
           <p>© 2024 Obsidian Inc. All rights reserved.</p>
           <div className="flex gap-6">
             <a
-              href="#"
+              href="/privacy-policy"
               className="transition-colors hover:text-white"
             >
               Privacy Policy
             </a>
             <a
-              href="#"
+              href="/terms-of-service"
               className="transition-colors hover:text-white"
             >
               Terms of Service

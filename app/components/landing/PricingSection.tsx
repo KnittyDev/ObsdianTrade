@@ -54,7 +54,7 @@ const plans = [
       "Instant Earnings",
       "Instant Withdrawals",
     ],
-    cta: "Contact Us",
+    cta: "Join Now",
     highlighted: false,
   },
 ];
