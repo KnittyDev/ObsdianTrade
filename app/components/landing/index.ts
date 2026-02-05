@@ -4,6 +4,7 @@ export { HeroSection } from "./HeroSection";
 export { HeroChart } from "./HeroChart";
 export { StatsSection } from "./StatsSection";
 export { FeaturesSection } from "./FeaturesSection";
+export { PerformanceSection } from "./PerformanceSection";
 export { CalculatorSection } from "./CalculatorSection";
 export { PricingSection } from "./PricingSection";
 export { Footer } from "./Footer";

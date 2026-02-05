@@ -4,6 +4,7 @@ import {
   HeroSection,
   StatsSection,
   FeaturesSection,
+  PerformanceSection,
   CalculatorSection,
   PricingSection,
   Footer,
@@ -17,6 +18,7 @@ export default function Home() {
       <HeroSection />
       <StatsSection />
       <FeaturesSection />
+      <PerformanceSection />
       <CalculatorSection />
       <PricingSection />
       <Footer />

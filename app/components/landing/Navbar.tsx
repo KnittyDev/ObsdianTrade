@@ -41,19 +41,7 @@ export function Navbar() {
         </nav>
 
         {/* CTA */}
-        <div className="hidden items-center gap-3 md:flex">
-          <Link
-            href="/dashboard"
-            className="cursor-pointer text-sm font-medium text-gray-400 transition-colors hover:text-white"
-          >
-            Dashboard
-          </Link>
-          <Link
-            href="/register"
-            className="cursor-pointer text-sm font-medium text-gray-400 transition-colors hover:text-white"
-          >
-            Register
-          </Link>
+        <div className="hidden md:block">
           <Link
             href="/login"
             className="flex h-10 cursor-pointer items-center justify-center rounded-full border border-white/10 bg-white/5 px-6 text-sm font-bold tracking-wide text-white transition-all duration-300 hover:bg-white hover:text-black"
@@ -89,20 +77,6 @@ export function Navbar() {
                 {link.label}
               </a>
             ))}
-            <Link
-              href="/dashboard"
-              className="cursor-pointer text-sm font-medium text-gray-400 hover:text-white"
-              onClick={() => setMobileOpen(false)}
-            >
-              Dashboard
-            </Link>
-            <Link
-              href="/register"
-              className="cursor-pointer text-sm font-medium text-gray-400 hover:text-white"
-              onClick={() => setMobileOpen(false)}
-            >
-              Register
-            </Link>
             <Link
               href="/login"
               className="flex h-10 cursor-pointer items-center justify-center rounded-full border border-white/10 bg-white/5 px-6 text-sm font-bold text-white"
