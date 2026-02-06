@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import { QRCodeSVG } from "qrcode.react";
 
 const portfolioSummary = {
   totalValue: "€12,450.00",
@@ -20,6 +21,12 @@ const ASSETS = [
   { value: "USDT", label: "Tether (USDT)" },
 ];
 
+const DEPOSIT_ADDRESSES: Record<string, string> = {
+  BTC: "bc1qxy2kgdygjrsqtzq2n0yrf2493p83kkfjhxd0wl",
+  ETH: "0x742d35Cc6634C0532925a3b844Bc454e4438f44e",
+  USDT: "0x742d35Cc6634C0532925a3b844Bc454e4438f44e",
+};
+
 export default function PortfolioPage() {
   const [depositOpen, setDepositOpen] = useState(false);
   const [withdrawOpen, setWithdrawOpen] = useState(false);
@@ -28,6 +35,14 @@ export default function PortfolioPage() {
   const [withdrawAsset, setWithdrawAsset] = useState("BTC");
   const [withdrawAmount, setWithdrawAmount] = useState("");
   const [withdrawAddress, setWithdrawAddress] = useState("");
+  const [addressCopied, setAddressCopied] = useState(false);
+
+  const depositAddress = DEPOSIT_ADDRESSES[depositAsset] ?? DEPOSIT_ADDRESSES.BTC;
+  const copyAddress = () => {
+    void navigator.clipboard.writeText(depositAddress);
+    setAddressCopied(true);
+    setTimeout(() => setAddressCopied(false), 2000);
+  };
 
   return (
     <div className="p-6 lg:p-10">
@@ -142,7 +157,7 @@ export default function PortfolioPage() {
         </div>
       </div>
 
-      {/* Deposit modal */}
+      {/* Deposit modal - Payment screen with QR + address */}
       {depositOpen && (
         <div className="fixed inset-0 z-50 flex items-center justify-center p-4" role="dialog" aria-modal="true" aria-labelledby="deposit-title">
           <button
@@ -166,58 +181,55 @@ export default function PortfolioPage() {
                 <span className="material-symbols-outlined">close</span>
               </button>
             </div>
-            <form
-              onSubmit={(e) => {
-                e.preventDefault();
-                setDepositOpen(false);
-                setDepositAmount("");
-              }}
-              className="space-y-4"
-            >
-              <div>
-                <label htmlFor="deposit-asset" className="mb-2 block text-sm font-medium text-gray-400">Asset</label>
-                <select
-                  id="deposit-asset"
-                  value={depositAsset}
-                  onChange={(e) => setDepositAsset(e.target.value)}
-                  className="w-full cursor-pointer rounded-lg border border-white/10 bg-white/5 px-4 py-3 text-white focus:border-white/20 focus:outline-none focus:ring-1 focus:ring-white/20"
-                >
-                  {ASSETS.map((a) => (
-                    <option key={a.value} value={a.value} className="bg-[#111] text-white">{a.label}</option>
-                  ))}
-                </select>
-              </div>
-              <div>
-                <label htmlFor="deposit-amount" className="mb-2 block text-sm font-medium text-gray-400">Amount</label>
-                <input
-                  id="deposit-amount"
-                  type="text"
-                  inputMode="decimal"
-                  placeholder="0.00"
-                  value={depositAmount}
-                  onChange={(e) => setDepositAmount(e.target.value)}
-                  className="w-full rounded-lg border border-white/10 bg-white/5 px-4 py-3 text-white placeholder:text-gray-500 focus:border-white/20 focus:outline-none focus:ring-1 focus:ring-white/20"
-                />
-              </div>
-              <p className="text-xs text-gray-500">
-                You will receive a deposit address after confirming. Only send {depositAsset} to this address.
+
+            <div>
+              <label htmlFor="deposit-asset" className="mb-2 block text-sm font-medium text-gray-400">Asset</label>
+              <select
+                id="deposit-asset"
+                value={depositAsset}
+                onChange={(e) => setDepositAsset(e.target.value)}
+                className="mb-6 w-full cursor-pointer rounded-lg border border-white/10 bg-white/5 px-4 py-3 text-white focus:border-white/20 focus:outline-none focus:ring-1 focus:ring-white/20"
+              >
+                {ASSETS.map((a) => (
+                  <option key={a.value} value={a.value} className="bg-[#111] text-white">{a.label}</option>
+                ))}
+              </select>
+            </div>
+
+            <div className="rounded-xl border border-white/10 bg-white/5 p-6">
+              <p className="mb-4 text-center text-sm font-medium text-gray-400">
+                Scan QR or copy address to deposit {depositAsset}
               </p>
-              <div className="flex gap-3 pt-2">
+              <div className="mb-4 flex justify-center rounded-lg bg-white p-4">
+                <QRCodeSVG value={depositAddress} size={180} level="M" includeMargin />
+              </div>
+              <div className="mb-4 flex items-center gap-2 rounded-lg border border-white/10 bg-black/30 px-3 py-2">
+                <code className="min-w-0 flex-1 truncate text-xs text-gray-300">
+                  {depositAddress}
+                </code>
                 <button
                   type="button"
-                  onClick={() => setDepositOpen(false)}
-                  className="flex-1 cursor-pointer rounded-lg border border-white/20 bg-white/5 py-3 text-sm font-medium text-white hover:bg-white/10"
+                  onClick={copyAddress}
+                  className="flex shrink-0 cursor-pointer items-center gap-1 rounded-lg border border-white/20 bg-white/5 px-3 py-1.5 text-xs font-medium text-white transition-colors hover:bg-white/10"
                 >
-                  Cancel
-                </button>
-                <button
-                  type="submit"
-                  className="flex-1 cursor-pointer rounded-lg bg-white py-3 text-sm font-bold text-black hover:bg-gray-200"
-                >
-                  Continue
+                  <span className="material-symbols-outlined !text-[16px]">
+                    {addressCopied ? "check" : "content_copy"}
+                  </span>
+                  {addressCopied ? "Copied" : "Copy"}
                 </button>
               </div>
-            </form>
+              <p className="text-center text-xs text-amber-400/90">
+                Only send {depositAsset} to this address. Sending other assets may result in permanent loss.
+              </p>
+            </div>
+
+            <button
+              type="button"
+              onClick={() => setDepositOpen(false)}
+              className="mt-6 w-full cursor-pointer rounded-lg border border-white/20 bg-white/5 py-3 text-sm font-medium text-white transition-colors hover:bg-white/10"
+            >
+              Done
+            </button>
           </div>
         </div>
       )}
