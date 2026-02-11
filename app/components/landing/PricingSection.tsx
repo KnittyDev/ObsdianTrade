@@ -63,7 +63,7 @@ export function PricingSection() {
   return (
     <section id="pricing" className="relative z-10 px-6 py-24">
       <div className="mx-auto max-w-[1200px]">
-        {/* Heading with slogan */}
+        {/* Heading with slogan C/D*/}
         <div className="mb-10 flex flex-col items-center gap-6 px-4 text-center">
           <div className="flex max-w-2xl flex-col gap-3">
             <h2 className="text-4xl font-black leading-tight tracking-tight text-white md:text-5xl lg:text-6xl">
