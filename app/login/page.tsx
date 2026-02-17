@@ -8,7 +8,7 @@ export default function LoginPage() {
     <div className="relative flex min-h-screen flex-col">
       <BackgroundEffects />
       <Navbar />
-      <main className="relative z-10 flex flex-1 items-center justify-center px-6 py-16">
+      <main id="main" className="relative z-10 flex flex-1 items-center justify-center px-6 py-16">
         <div className="glass-card w-full max-w-md rounded-2xl border border-white/10 p-8 shadow-2xl">
           <div className="mb-8 flex items-center gap-3">
             <span className="material-symbols-outlined text-3xl text-white">

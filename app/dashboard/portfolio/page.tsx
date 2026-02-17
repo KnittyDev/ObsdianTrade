@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import { QRCodeSVG } from "qrcode.react";
+import { useToast } from "@/app/components/ToastProvider";
 
 const portfolioSummary = {
   totalValue: "€12,450.00",
@@ -36,11 +37,13 @@ export default function PortfolioPage() {
   const [withdrawAmount, setWithdrawAmount] = useState("");
   const [withdrawAddress, setWithdrawAddress] = useState("");
   const [addressCopied, setAddressCopied] = useState(false);
+  const { addToast } = useToast();
 
   const depositAddress = DEPOSIT_ADDRESSES[depositAsset] ?? DEPOSIT_ADDRESSES.BTC;
   const copyAddress = () => {
     void navigator.clipboard.writeText(depositAddress);
     setAddressCopied(true);
+    addToast("Address copied", "success");
     setTimeout(() => setAddressCopied(false), 2000);
   };
 

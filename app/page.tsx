@@ -12,7 +12,7 @@ import {
 
 export default function Home() {
   return (
-    <div className="relative z-10 flex min-h-screen flex-col">
+    <div id="main" className="relative z-10 flex min-h-screen flex-col">
       <BackgroundEffects />
       <Navbar />
       <HeroSection />

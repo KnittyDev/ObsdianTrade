@@ -2,6 +2,9 @@ import type { Metadata } from "next";
 import "material-symbols/outlined.css";
 import "./globals.css";
 import { CookieConsentBanner } from "@/app/components/CookieConsentBanner";
+import { BackToTop } from "@/app/components/BackToTop";
+import { ToastProvider } from "@/app/components/ToastProvider";
+import { SkipToContent } from "@/app/components/SkipToContent";
 
 export const metadata: Metadata = {
   title: "Obsidian - Luxury Crypto Bot",
@@ -17,8 +20,12 @@ export default function RootLayout({
   return (
     <html lang="en" className="dark">
       <body className="overflow-x-hidden bg-background-dark font-display text-white antialiased">
-        {children}
+        <SkipToContent />
+        <ToastProvider>
+          {children}
+        </ToastProvider>
         <CookieConsentBanner />
+        <BackToTop />
       </body>
     </html>
   );

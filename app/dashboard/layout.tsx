@@ -10,7 +10,7 @@ export default function DashboardLayout({
     <div className="relative min-h-screen bg-background-dark">
       <BackgroundEffects />
       <DashboardSidebar />
-      <main className="relative z-10 min-h-screen pl-0 pt-16 lg:pl-64 lg:pt-0">{children}</main>
+      <main id="main" className="relative z-10 min-h-screen pl-0 pt-16 lg:pl-64 lg:pt-0">{children}</main>
     </div>
   );
 }

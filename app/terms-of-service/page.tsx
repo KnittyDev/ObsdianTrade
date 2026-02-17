@@ -11,7 +11,7 @@ export default function TermsOfServicePage() {
     <div className="relative flex min-h-screen flex-col">
       <BackgroundEffects />
       <Navbar />
-      <main className="relative z-10 mx-auto w-full max-w-3xl flex-1 px-6 py-16">
+      <main id="main" className="relative z-10 mx-auto w-full max-w-3xl flex-1 px-6 py-16">
         <Link
           href="/"
           className="mb-8 inline-flex cursor-pointer items-center gap-2 text-sm font-medium text-gray-400 transition-colors hover:text-white"
