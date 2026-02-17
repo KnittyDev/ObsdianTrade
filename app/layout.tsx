@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import "material-symbols/outlined.css";
 import "./globals.css";
+import { CookieConsentBanner } from "@/app/components/CookieConsentBanner";
 
 export const metadata: Metadata = {
   title: "Obsidian - Luxury Crypto Bot",
@@ -17,6 +18,7 @@ export default function RootLayout({
     <html lang="en" className="dark">
       <body className="overflow-x-hidden bg-background-dark font-display text-white antialiased">
         {children}
+        <CookieConsentBanner />
       </body>
     </html>
   );
