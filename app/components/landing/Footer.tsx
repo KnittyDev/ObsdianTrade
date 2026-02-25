@@ -30,10 +30,16 @@ export function Footer() {
               Terms of Service
             </a>
             <a
-              href="#"
+              href="/contact"
               className="transition-colors hover:text-white"
             >
               Contact
+            </a>
+            <a
+              href="/faq"
+              className="transition-colors hover:text-white"
+            >
+              FAQ
             </a>
           </div>
           <div className="flex gap-4">

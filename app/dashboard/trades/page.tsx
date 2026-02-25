@@ -1,6 +1,8 @@
 "use client";
 
 import { useState } from "react";
+import Link from "next/link";
+import { useToast } from "@/app/components/ToastProvider";
 
 const allTrades = [
   { id: 1, date: "2025-02-03 14:32", pair: "BTC/USDT", side: "Long", amount: "0.024 BTC", price: "€78,200", pnl: "+€124", status: "Filled" },
@@ -12,9 +14,22 @@ const allTrades = [
   { id: 7, date: "2025-02-02 16:00", pair: "BTC/USDT", side: "Long", amount: "0.02 BTC", price: "€77,900", pnl: "+€96", status: "Filled" },
 ];
 
+function downloadCsv(trades: typeof allTrades) {
+  const headers = "Date,Pair,Side,Amount,Price,P&L,Status\n";
+  const rows = trades.map((t) => `${t.date},${t.pair},${t.side},${t.amount},${t.price},${t.pnl},${t.status}`).join("\n");
+  const blob = new Blob([headers + rows], { type: "text/csv" });
+  const url = URL.createObjectURL(blob);
+  const a = document.createElement("a");
+  a.href = url;
+  a.download = `obsidian-trades-${new Date().toISOString().slice(0, 10)}.csv`;
+  a.click();
+  URL.revokeObjectURL(url);
+}
+
 export default function TradesPage() {
   const [pairFilter, setPairFilter] = useState<string>("all");
   const [sideFilter, setSideFilter] = useState<string>("all");
+  const { addToast } = useToast();
 
   const pairs = ["all", ...new Set(allTrades.map((t) => t.pair))];
   const filteredTrades = allTrades.filter((t) => {
@@ -22,6 +37,11 @@ export default function TradesPage() {
     if (sideFilter !== "all" && t.side !== sideFilter) return false;
     return true;
   });
+
+  const handleExport = () => {
+    downloadCsv(filteredTrades);
+    addToast("Trades exported to CSV", "success");
+  };
 
   return (
     <div className="p-6 lg:p-10">
@@ -59,6 +79,15 @@ export default function TradesPage() {
         <span className="text-sm text-gray-500">
           {filteredTrades.length} trade{filteredTrades.length !== 1 ? "s" : ""}
         </span>
+        <button
+          type="button"
+          onClick={handleExport}
+          disabled={filteredTrades.length === 0}
+          className="ml-auto flex cursor-pointer items-center gap-2 rounded-lg border border-white/20 bg-white/5 px-4 py-2 text-sm font-medium text-white transition-colors hover:bg-white/10 disabled:cursor-not-allowed disabled:opacity-50"
+        >
+          <span className="material-symbols-outlined !text-[18px]">download</span>
+          Export CSV
+        </button>
       </div>
 
       {/* Trades table */}
@@ -121,7 +150,32 @@ export default function TradesPage() {
           </table>
         </div>
         {filteredTrades.length === 0 && (
-          <p className="py-8 text-center text-gray-500">No trades match your filters.</p>
+          <div className="flex flex-col items-center justify-center py-16 text-center">
+            <span className="material-symbols-outlined mb-4 text-6xl text-white/20">swap_horiz</span>
+            <h3 className="text-lg font-semibold text-white">No trades found</h3>
+            <p className="mt-2 max-w-sm text-sm text-gray-400">
+              {pairFilter !== "all" || sideFilter !== "all"
+                ? "No trades match your filters. Try changing the filters above."
+                : "Your trade history will appear here once the bot executes trades."}
+            </p>
+            {(pairFilter !== "all" || sideFilter !== "all") ? (
+              <button
+                type="button"
+                onClick={() => { setPairFilter("all"); setSideFilter("all"); }}
+                className="mt-6 cursor-pointer rounded-lg border border-white/20 bg-white/5 px-4 py-2 text-sm font-medium text-white hover:bg-white/10"
+              >
+                Clear filters
+              </button>
+            ) : (
+              <Link
+                href="/dashboard/bots"
+                className="mt-6 inline-flex cursor-pointer items-center gap-2 rounded-lg bg-white px-4 py-2 text-sm font-bold text-black hover:bg-gray-200"
+              >
+                Manage bots
+                <span className="material-symbols-outlined !text-[18px]">arrow_forward</span>
+              </Link>
+            )}
+          </div>
         )}
       </div>
     </div>

@@ -1,5 +1,5 @@
 import { BackgroundEffects } from "@/app/components/landing";
-import { DashboardSidebar } from "@/app/components/dashboard";
+import { DashboardSidebar, NotificationsBell } from "@/app/components/dashboard";
 
 export default function DashboardLayout({
   children,
@@ -10,7 +10,10 @@ export default function DashboardLayout({
     <div className="relative min-h-screen bg-background-dark">
       <BackgroundEffects />
       <DashboardSidebar />
-      <main id="main" className="relative z-10 min-h-screen pl-0 pt-16 lg:pl-64 lg:pt-0">{children}</main>
+      <main id="main" className="relative z-10 min-h-screen pl-0 pt-16 lg:pl-64 lg:pt-0">
+        <NotificationsBell />
+        {children}
+      </main>
     </div>
   );
 }
